@@ -17,7 +17,7 @@ def visualize_path(grid_map, start, goal, path):  # pragma: no cover
    # px, py = np.transpose(np.flipud(np.fliplr(path)))
 
     if not do_animation:
-        plt.imshow(grid_map, cmap='Greys')
+        plt.imshow(grid_map, cmap='viridis')
         plt.plot(ox, oy, "-xy")
         plt.plot(px, py, "-r")
         plt.plot(gx, gy, "-pg")
@@ -29,7 +29,7 @@ def visualize_path(grid_map, start, goal, path):  # pragma: no cover
             plt.gcf().canvas.mpl_connect(
                 'key_release_event',
                 lambda event: [exit(0) if event.key == 'escape' else None])
-            plt.imshow(grid_map, cmap='Greys')
+            plt.imshow(grid_map, cmap='viridis')
             plt.plot(oy, ox, "-xb")
             plt.plot(py, px, "-r")
             plt.plot(gy, gx, "-pg")
@@ -54,7 +54,7 @@ coverage_path_bcd = bcd(area_map, start_point)      # calculate coverage path us
 # end_point = coverage_path_bcd[-1]
 print(end_point)
 # print(coverage_path_bcd)
-# visualize_path(area_map, start_point, end_point, coverage_path_bcd)
+
 
 
 
@@ -65,19 +65,20 @@ imshow_scatter([start_point], color="black")    # show the start_point   (green)
 imshow_scatter([end_point], color="red")        # show the end_point     (red)
 print(end_point)
 # cm = coverage_metrics(area_map, coverage_path)  # calculate coverage metrics
+visualize_path(area_map, start_point, end_point, coverage_path_bcd)
 
 # ---- Calculate Coverage Path ----
 # start_point = get_random_coords(area_map, 1)[0]  # returns a random coord not on an obstacle
 print(start_point)
 # start_point = (area_map(0),1)
-coverage_path_wavefront = wavefront(area_map, start_point)      # calculate coverage path using wavefront
+coverage_path_wavefront = wavefront(area_map, start_point,end_point)      # calculate coverage path using wavefront
 # end_point = coverage_path_wavefront[-1]
 print(end_point)
 # print(coverage_path_wavefront)
 visualize_path(area_map, start_point, end_point, coverage_path_wavefront)
 # ---- Display The Stuff ----
-#imshow(area_map, figsize=(200, 200), cmap="Blues_r")                # shows the area_map
-#plot(coverage_path_wavefront, alpha=1.8, color="green")
-#imshow_scatter([start_point], color="black")    # show the start_point   (green)
-#imshow_scatter([end_point], color="red")        # show the end_point     (red)
+imshow(area_map, figsize=(200, 200), cmap="Blues_r")                # shows the area_map
+plot(coverage_path_wavefront, alpha=1.8, color="green")
+imshow_scatter([start_point], color="black")    # show the start_point   (green)
+imshow_scatter([end_point], color="red")        # show the end_point     (red)
 print(end_point)

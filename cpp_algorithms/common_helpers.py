@@ -107,9 +107,9 @@ def get_random_coords(area_map, n=2, obs=-1):
     # r = lambda x: np.random.randint(0, x)
     b1, b2 = area_map.shape
     coords = []
-    for i in range(b2):
-        for j in range(b1):
-            p = (j, i)
+    for i in range(b1):
+        for j in range(b2-1, 0, -1):
+            p = (i, j)
             if area_map[p] != obs:
                 coords.append(p)
                 break

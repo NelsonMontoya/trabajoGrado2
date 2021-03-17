@@ -22,7 +22,7 @@ def is_bounded(coord, shape):
         return False
     return True
 
-def is_valid(coord, area_map, obstacle = -1):
+def is_valid(coord, area_map, obstacle=-1):
     """
     Check is a coord (x,y) is bounded and not
     on an obstacle.
@@ -36,7 +36,7 @@ def is_valid(coord, area_map, obstacle = -1):
             for obs in obstacle:
                 is_on_obs |= area_map[coord] == obs
         else:
-            is_on_obs  = area_map[coord] == obstacle
+            is_on_obs = area_map[coord] == obstacle
         if not is_on_obs:
             return True
     return False
