@@ -19,7 +19,7 @@ class Grid(object):
         self.curvePoints = []
         self.alt0 = 5
         self.alt1 = 5
-        self.theta = 0
+        self.theta = 270
         self.timeOfFly = 0
         self.distanceOfFly = 0
         self.velocityOfFly = 5   # m/s
@@ -35,11 +35,13 @@ class Grid(object):
     def validatePixelstoMeters(self):
         n = int(self.x_in_meters/self.step)
         p = int(self.y_in_meters/self.step)
+        print(n, p)
         image = Image.open("./fotos/comb_5.png")
         # image.show()
         new_image = image.resize((n, p))
         # new_image.show()
         new_image.save("./test_maps/comb_5_1.png")
+
 
     @staticmethod
     def rot2D(theta):
@@ -62,16 +64,16 @@ class Grid(object):
     def buildGrid(self, x_pixels, y_pixels):
 
         # rotate cords
-        rotatedPoly = self.rotateGrid()
-        self.xPixels = x_pixels
-        self.yPixels = y_pixels
-        minx, miny, maxx, maxy = rotatedPoly.bounds
-        # minx, miny, maxx, maxy = self.poly.bounds
-        self.xResol = float(self.x_in_meters / self.xPixels)
-        self.yResol = float(self.y_in_meters / self.yPixels)
+        # rotatedPoly = self.rotateGrid()
+        #self.xPixels = x_pixels
+        #self.yPixels = y_pixels
+        # minx, miny, maxx, maxy = rotatedPoly.bounds
+        minx, miny, maxx, maxy = self.poly.bounds
+        # self.xResol = float(self.x_in_meters / self.xPixels)
+        # self.yResol = float(self.y_in_meters / self.yPixels)
 
-        self.xWorld = np.arange(minx, maxx, self.xResol)
-        self.yWorld = np.arange(miny, maxy, self.yResol)
+        self.xWorld = np.arange(minx, maxx, self.step)
+        self.yWorld = np.arange(miny, maxy, self.step)
         self.nX = len(self.xWorld)
         self.nY = len(self.yWorld)
 
